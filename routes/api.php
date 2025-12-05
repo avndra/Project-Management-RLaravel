@@ -28,7 +28,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users/{user}/tasks', [UserController::class, 'tasks']);
 
     Route::apiResource('tasks.comments', CommentController::class)->shallow();
-    Route::post('/events', [App\Http\Controllers\Api\EventController::class, 'store']);
+    Route::apiResource('events', App\Http\Controllers\Api\EventController::class);
 
     Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
     Route::get('/calendar/events', [DashboardController::class, 'calendarEvents']);
