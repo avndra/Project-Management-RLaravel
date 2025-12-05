@@ -1,59 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OrxusPM - Sistem Manajemen Proyek
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+OrxusPM adalah aplikasi manajemen proyek modern yang dibangun dengan Laravel dan React. Aplikasi ini dirancang untuk membantu tim mengelola tugas, proyek, dan jadwal dengan efisien menggunakan antarmuka yang intuitif dan responsif.
 
-## About Laravel
+## 🚀 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Manajemen Tugas (Kanban Board)**: Drag & drop tugas antar status (Todo, In Progress, Done).
+-   **Manajemen Proyek**: Buat dan kelola proyek dengan mudah.
+-   **Kalender Interaktif**: Jadwalkan meeting, lihat event mendatang, dan tag peserta.
+-   **Sistem Peran (Role)**: Akses berbeda untuk Admin dan Staff.
+-   **Dashboard Real-time**: Widget "Upcoming Events" yang dinamis dan statistik tugas.
+-   **Desain Modern**: Antarmuka pengguna yang bersih dan responsif menggunakan Tailwind CSS.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Teknologi yang Digunakan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Backend**: Laravel 11
+-   **Frontend**: React + Vite
+-   **Database**: MySQL
+-   **Styling**: Tailwind CSS
+-   **Icons**: Lucide React
 
-## Learning Laravel
+## 📋 Prasyarat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Sebelum memulai, pastikan Anda telah menginstal:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   PHP >= 8.2
+-   Composer
+-   Node.js & NPM
+-   MySQL
 
-## Laravel Sponsors
+## ⚙️ Cara Instalasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di komputer lokal Anda:
 
-### Premium Partners
+### 1. Clone Repository
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+git clone https://github.com/avndra/Project-Management-RLaravel.git
+cd Project-Management-RLaravel
+```
 
-## Contributing
+### 2. Setup Backend (Laravel)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# Install dependensi PHP
+composer install
 
-## Code of Conduct
+# Salin file environment
+cp .env.example .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Generate Application Key
+php artisan key:generate
 
-## Security Vulnerabilities
+# Konfigurasi Database di file .env
+# Pastikan Anda sudah membuat database kosong (misal: orxus_pm) di MySQL
+# DB_DATABASE=orxus_pm
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Jalankan Migrasi dan Seeder (PENTING: Ini akan mengisi data awal)
+php artisan migrate --seed
 
-## License
+# Jalankan Server Backend
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Setup Frontend (React)
+
+Buka terminal baru dan masuk ke folder frontend (jika terpisah) atau root project tergantung struktur. Dalam proyek ini, frontend berada di `orxus-frontend`.
+
+```bash
+cd orxus-frontend
+
+# Install dependensi JavaScript
+npm install
+
+# Jalankan Server Frontend
+npm run dev
+```
+
+Akses aplikasi di `http://localhost:5173` (atau port yang ditampilkan di terminal).
+
+## 🔐 Cara Penggunaan (Login & Daftar)
+
+### Akun Default (Admin)
+
+Setelah menjalankan `php artisan migrate --seed`, akun admin berikut sudah tersedia dan **tidak perlu mendaftar ulang**:
+
+-   **Email**: `admin@orxus.com`
+-   **Password**: `password`
+
+Admin memiliki akses penuh untuk:
+-   Membuat Proyek & Tugas
+-   Menjadwalkan Meeting & Tag Peserta
+-   Melihat semua aktivitas
+
+### Akun Staff
+
+Beberapa akun staff contoh juga telah dibuat:
+-   **Email**: `budi@orxus.com` / `password`
+-   **Email**: `siti@orxus.com` / `password`
+
+### Pendaftaran Pengguna Baru (Register)
+
+Jika Anda ingin mencoba sebagai pengguna baru:
+1.  Buka halaman Login.
+2.  Klik link **"Daftar"** atau **"Register"**.
+3.  Isi Nama, Email, dan Password.
+4.  Setelah mendaftar, Anda akan masuk sebagai **Staff** (User biasa) secara default.
+5.  Staff hanya dapat melihat tugas yang diberikan kepada mereka dan event publik atau yang men-tag mereka.
+
+## 📅 Fitur Kalender & Event
+
+-   **Admin**: Klik tombol "Jadwalkan Meeting" di halaman Kalender. Anda bisa mengisi detail dan memilih (tag) staff yang akan hadir.
+-   **Staff**: Akan melihat event di widget "Upcoming Events" di Dashboard dan di halaman Kalender. Klik event untuk melihat detail dan siapa saja yang hadir.
+
+---
+
+Dibuat dengan ❤️ oleh Tim Orxus.
