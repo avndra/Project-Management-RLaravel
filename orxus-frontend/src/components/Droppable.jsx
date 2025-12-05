@@ -1,0 +1,14 @@
+import React from 'react';
+import { useDroppable } from '@dnd-kit/core';
+
+const Droppable = ({ id, children }) => {
+    const { setNodeRef } = useDroppable({ id });
+
+    return (
+        <div ref={setNodeRef} className="bg-gray-100 p-4 rounded-lg w-80">
+            {children}
+        </div>
+    );
+};
+
+export default Droppable;
