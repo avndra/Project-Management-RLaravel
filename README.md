@@ -2,7 +2,7 @@
 
 Sistem Manajemen Proyek sederhana.
 
-## 🛠️ Teknologi
+## 🛠️ Uses
 
 -   **Backend**: Laravel 11 (PHP)
 -   **Frontend**: React + Vite
@@ -20,7 +20,6 @@ Sistem Manajemen Proyek sederhana.
 -   `api/projects` (ProjectController)
 -   `api/tasks` (TaskController)
 -   `api/users` (UserController)
--   `api/categories` (CategoryController)
 -   `api/events` (EventController)
 -   `api/tasks.comments` (CommentController)
 
