@@ -6,7 +6,7 @@
     -   **Admin**: Manage projects, users, and view global statistics.
     -   **Staff**: View assigned tasks, update task status, and track personal progress.
 -   **Dashboard**:
-    -   Real-time statistics (Total Tasks, In Progress, Overdue, Completed).
+    -   Real-time statistics (Total Tasks, In Progress, Completed).
 -   **Task Management**:
     -   Create, edit, and delete tasks.
     -   Assign tasks to specific users.
@@ -87,25 +87,26 @@ The application will be accessible at `http://localhost:5173`.
 ## 🔗 API Documentation
 
 ### Authentication
-| `POST` | `/api/register` | Register a new user |
-| `POST` | `/api/login` | Login and get token |
-| `POST` | `/api/logout` | Logout (Requires Auth) |
+-   `POST /api/register` - Register a new user
+-   `POST /api/login` - Login and get token
+-   `POST /api/logout` - Logout (Requires Auth)
 
 ### Users
-| `GET` | `/api/user` | Get current authenticated user |
-| `GET` | `/api/users` | List all users |
-| `GET` | `/api/users/{id}/tasks` | Get tasks assigned to a specific user |
+-   `GET /api/user` - Get current authenticated user
+-   `POST /api/user/profile` - Update user profile
+-   `GET /api/users` - List all users
+-   `GET /api/users/{id}/tasks` - Get tasks assigned to a specific user
 
 ### Projects & Tasks
-| `GET` | `/api/projects` | List all projects |
-| `POST` | `/api/projects` | Create a new project |
-| `GET` | `/api/tasks` | List all tasks |
-| `POST` | `/api/tasks` | Create a new task |
-| `PUT` | `/api/tasks/{id}` | Update a task |
-| `DELETE` | `/api/tasks/{id}` | Delete a task |
+-   `GET /api/projects` - List all projects
+-   `POST /api/projects` - Create a new project
+-   `GET /api/tasks` - List all tasks
+-   `POST /api/tasks` - Create a new task
+-   `PUT /api/tasks/{id}` - Update a task
+-   `DELETE /api/tasks/{id}` - Delete a task
 
 ### Dashboard
-| `GET` | `/api/calendar/events` | Get events for the calendar |
+-   `GET /api/calendar/events` - Get events for the calendar
 
 ## 📄 License
 
