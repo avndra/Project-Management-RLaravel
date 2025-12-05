@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CategoryController;
+
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ProjectController;
@@ -23,7 +23,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('tasks', TaskController::class);
     Route::apiResource('users', UserController::class);
-    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('users', UserController::class);
 
     Route::get('/users/{user}/tasks', [UserController::class, 'tasks']);
 

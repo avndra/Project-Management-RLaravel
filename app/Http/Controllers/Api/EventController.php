@@ -7,6 +7,9 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
+
 class EventController extends Controller
 {
     /**
@@ -21,16 +24,9 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-            'participants' => 'nullable|array',
-            'participants.*' => 'exists:users,id',
-        ]);
+        $validated = $request->validated();
 
         $event = Event::create([
             'title' => $validated['title'],
@@ -58,16 +54,9 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event)
     {
-        $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'description' => 'nullable|string',
-            'start_time' => 'sometimes|required|date',
-            'end_time' => 'sometimes|required|date|after:start_time',
-            'participants' => 'nullable|array',
-            'participants.*' => 'exists:users,id',
-        ]);
+        $validated = $request->validated();
 
         $event->update($request->only(['title', 'description', 'start_time', 'end_time']));
 
