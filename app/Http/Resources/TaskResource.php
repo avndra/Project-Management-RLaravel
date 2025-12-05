@@ -22,7 +22,6 @@ class TaskResource extends JsonResource
             'priority' => $this->priority,
             'due_date' => $this->due_date,
             'project' => new ProjectResource($this->whenLoaded('project')),
-            'category' => new CategoryResource($this->whenLoaded('category')),
             'assignees' => UserResource::collection($this->whenLoaded('assignees')),
             'reporter' => new UserResource($this->whenLoaded('reporter')),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),

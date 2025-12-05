@@ -116,12 +116,9 @@ class UserController extends Controller
      */
     public function tasks(User $user)
     {
-        // Get IDs of projects/divisions the user belongs to
-        $projectIds = $user->projects->pluck('id');
-
-        // Fetch tasks that belong to those projects
-        $tasks = \App\Models\Task::whereIn('project_id', $projectIds)
-            ->with(['project', 'category', 'assignees'])
+        // Fetch tasks assigned to the user
+        $tasks = $user->assignedTasks()
+            ->with(['project', 'assignees'])
             ->get();
 
         return TaskResource::collection($tasks);

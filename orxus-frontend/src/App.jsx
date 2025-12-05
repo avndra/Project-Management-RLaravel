@@ -12,7 +12,7 @@ import AdminRoute from './components/AdminRoute';
 import Projects from './pages/Projects';
 import Calendar from './pages/Calendar';
 import Team from './pages/Team';
-import Categories from './pages/Categories';
+
 import Settings from './pages/Settings';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
                     <Route path="projects" element={<AdminRoute><Projects /></AdminRoute>} />
                     <Route path="calendar" element={<Calendar />} />
                     <Route path="team" element={<AdminRoute><Team /></AdminRoute>} />
-                    <Route path="categories" element={<AdminRoute><Categories /></AdminRoute>} />
+
                     <Route path="settings" element={<Settings />} />
                 </Route>
                 <Route path="/login" element={<Login />} />

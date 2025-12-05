@@ -12,14 +12,14 @@ const TaskDetail = () => {
     const [task, setTask] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     const [isEditing, setIsEditing] = useState(false);
     const [editData, setEditData] = useState({});
-    
+
     const [newComment, setNewComment] = useState('');
-    
+
     const [projects, setProjects] = useState([]);
-    const [categories, setCategories] = useState([]);
+
     const [users, setUsers] = useState([]);
 
     const fetchTask = useCallback(() => {
@@ -31,7 +31,7 @@ const TaskDetail = () => {
                     title: response.data.data.title,
                     description: response.data.data.description,
                     project_id: response.data.data.project.id,
-                    category_id: response.data.data.category.id,
+
                     priority: response.data.data.priority,
                     due_date: response.data.data.due_date,
                     assignee_ids: response.data.data.assignees.map(u => ({ value: u.id, label: u.name })),
@@ -50,7 +50,7 @@ const TaskDetail = () => {
         fetchTask();
         if (user?.role === 'admin') {
             apiClient.get('/projects').then(res => setProjects(res.data.data));
-            apiClient.get('/categories').then(res => setCategories(res.data.data));
+
             apiClient.get('/users').then(res => setUsers(res.data.data));
         }
     }, [id, user, fetchTask]);
@@ -110,7 +110,7 @@ const TaskDetail = () => {
                     <h1 className="text-3xl font-bold text-gray-800">{task.title}</h1>
                 )}
                 <div className="flex items-center space-x-4">
-                     <select value={task.status} onChange={handleStatusChange} className="p-2 border rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select value={task.status} onChange={handleStatusChange} className="p-2 border rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="todo">Akan Dikerjakan</option>
                         <option value="inprogress">Sedang Dikerjakan</option>
                         <option value="done">Selesai</option>
@@ -128,14 +128,14 @@ const TaskDetail = () => {
             {isEditing && isAdmin ? (
                 <textarea name="description" value={editData.description} onChange={handleEditChange} className="w-full p-2 border rounded-lg mb-8" rows="4" />
             ) : (
-                 <p className="text-gray-800 whitespace-pre-wrap mb-8">{task.description}</p>
+                <p className="text-gray-800 whitespace-pre-wrap mb-8">{task.description}</p>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-gray-700 mb-2">Penerima Tugas</h3>
                     {isEditing && isAdmin ? (
-                         <Select isMulti options={userOptions} value={editData.assignee_ids} onChange={(val) => handleSelectChange('assignee_ids', val)} />
+                        <Select isMulti options={userOptions} value={editData.assignee_ids} onChange={(val) => handleSelectChange('assignee_ids', val)} />
                     ) : (
                         (task.assignees || []).map(assignee => <div key={assignee.id} className="text-gray-600 text-sm">{assignee.name}</div>)
                     )}
@@ -149,16 +149,16 @@ const TaskDetail = () => {
                             <option value="high">Tinggi</option>
                         </select>
                     ) : (
-                         <span className={`px-2 py-1 text-xs font-bold rounded-full ${ task.priority === 'high' ? 'bg-red-200 text-red-800' : task.priority === 'medium' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800' }`}>{task.priority}</span>
+                        <span className={`px-2 py-1 text-xs font-bold rounded-full ${task.priority === 'high' ? 'bg-red-200 text-red-800' : task.priority === 'medium' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800'}`}>{task.priority}</span>
                     )}
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-gray-700 mb-2">Tenggat Waktu</h3>
-                     {isEditing && isAdmin ? (
+                    {isEditing && isAdmin ? (
                         <input type="date" name="due_date" value={editData.due_date} onChange={handleEditChange} className="w-full p-2 border rounded-lg" />
-                     ) : (
+                    ) : (
                         <p className="text-gray-600 text-sm">{new Date(task.due_date).toLocaleDateString('id-ID')}</p>
-                     )}
+                    )}
                 </div>
             </div>
 

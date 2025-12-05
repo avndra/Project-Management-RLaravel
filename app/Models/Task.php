@@ -19,7 +19,6 @@ class Task extends Model
         'priority',
         'due_date',
         'project_id',
-        'category_id',
         'reporter_id',
     ];
 
@@ -30,11 +29,6 @@ class Task extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
     }
 
     public function assignees(): BelongsToMany

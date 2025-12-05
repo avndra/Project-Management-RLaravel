@@ -7,19 +7,19 @@ const CreateTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [projectId, setProjectId] = useState('');
-    const [categoryId, setCategoryId] = useState('');
+
     const [priority, setPriority] = useState('low');
     const [dueDate, setDueDate] = useState('');
     const [assigneeIds, setAssigneeIds] = useState([]);
 
     const [projects, setProjects] = useState([]);
-    const [categories, setCategories] = useState([]);
+
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         apiClient.get('/projects').then(response => setProjects(response.data.data));
-        apiClient.get('/categories').then(response => setCategories(response.data.data));
+
         apiClient.get('/users').then(response => setUsers(response.data.data));
     }, []);
 
@@ -29,7 +29,7 @@ const CreateTask = () => {
             title,
             description,
             project_id: projectId,
-            category_id: categoryId,
+
             priority,
             due_date: dueDate,
             assignee_ids: assigneeIds.map(assignee => assignee.value),
@@ -64,20 +64,7 @@ const CreateTask = () => {
                             ))}
                         </select>
                     </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Category</label>
-                        <select
-                            value={categoryId}
-                            onChange={(e) => setCategoryId(e.target.value)}
-                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
-                        >
-                            <option value="">Select a category</option>
-                            {Array.isArray(categories) && categories.map(category => (
-                                <option key={category.id} value={category.id}>{category.name}</option>
-                            ))}
-                        </select>
-                    </div>
+
                 </div>
                 <div>
                     <label className="block text-gray-700 font-medium mb-2">Title</label>

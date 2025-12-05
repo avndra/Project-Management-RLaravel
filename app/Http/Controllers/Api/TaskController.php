@@ -17,7 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return TaskResource::collection(Task::with(['project', 'category', 'assignees'])->get());
+        return TaskResource::collection(Task::with(['project', 'assignees'])->get());
     }
 
     /**
@@ -29,7 +29,6 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'project_id' => 'required|exists:projects,id',
-            'category_id' => 'required|exists:categories,id',
             'priority' => 'required|string|in:low,medium,high',
             'due_date' => 'required|date',
             'assignee_ids' => 'required|array',
@@ -51,7 +50,7 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $this->authorize('view', $task);
-        return new TaskResource($task->load(['project', 'category', 'assignees', 'comments.user']));
+        return new TaskResource($task->load(['project', 'assignees', 'comments.user']));
     }
 
     /**
@@ -77,7 +76,6 @@ class TaskController extends Controller
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
             'project_id' => 'sometimes|exists:projects,id',
-            'category_id' => 'sometimes|exists:categories,id',
             'priority' => 'sometimes|string|in:low,medium,high',
             'due_date' => 'sometimes|date',
             'status' => 'sometimes|string|in:todo,inprogress,done',
@@ -91,7 +89,7 @@ class TaskController extends Controller
             $task->assignees()->sync($validatedData['assignee_ids']);
         }
 
-        return new TaskResource($task->load(['project', 'category', 'assignees', 'comments.user']));
+        return new TaskResource($task->load(['project', 'assignees', 'comments.user']));
     }
 
     /**
