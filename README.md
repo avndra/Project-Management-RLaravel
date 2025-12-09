@@ -1,33 +1,37 @@
 # OrxusPM
 
+OrxusPM is a modern, lightweight Project Management System designed to streamline team collaboration. It features a responsive dashboard, task management with Kanban support, and role-based access control for Admins and Staff.
+
 ## 🚀 Features
 
 -   **Role-Based Access Control**:
     -   **Admin**: Manage projects, users, and view global statistics.
     -   **Staff**: View assigned tasks, update task status, and track personal progress.
 -   **Dashboard**:
-    -   Real-time statistics (Total Tasks, In Progress, Completed).
+    -   Real-time statistics (Total Tasks, In Progress, Overdue, Completed).
+    -   Visual charts and widgets.
 -   **Task Management**:
     -   Create, edit, and delete tasks.
     -   Assign tasks to specific users.
+    -   **Kanban Board**: Drag-and-drop interface for managing task status (Todo, In Progress, Done).
 -   **Project Management**: Organize tasks into specific projects.
--   **Calendar**: View upcoming deadlines and events.
--   **UI**: Built with React and Tailwind CSS with some Material UI
+-   **Calendar Integration**: View upcoming deadlines and events.
+-   **Modern UI**: Built with React, Tailwind CSS, and Material UI.
 
 ## 🛠️ Tech Stack
 
 -   **Backend**: Laravel 11 (PHP)
 -   **Frontend**: React + Vite
 -   **Database**: MySQL
--   **Styling**: Tailwind CSS
+-   **Styling**: Tailwind CSS + Material UI
 -   **Icons**: Lucide React
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
--   [PHP](https://www.php.net/downloads) 
+-   [PHP](https://www.php.net/downloads) (>= 8.2)
 -   [Composer](https://getcomposer.org/)
--   [Node.js](https://nodejs.org/)
+-   [Node.js](https://nodejs.org/) (LTS version recommended)
 -   [MySQL](https://www.mysql.com/)
 
 ## ⚙️ Installation
@@ -106,7 +110,12 @@ The application will be accessible at `http://localhost:5173`.
 -   `DELETE /api/tasks/{id}` - Delete a task
 
 ### Dashboard
+-   `GET /api/dashboard/stats` - Get dashboard statistics
 -   `GET /api/calendar/events` - Get events for the calendar
+
+## 👥 Authors
+
+-   **Silvaris** - *Initial work*
 
 ## 📄 License
 

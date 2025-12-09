@@ -112,12 +112,12 @@ const CalendarWidget = () => {
                             {events.map((event, index) => (
                                 <React.Fragment key={event.id}>
                                     <ListItem
-                                        button
                                         onClick={() => handleEventClick(event)}
                                         alignItems="flex-start"
                                         sx={{
                                             borderRadius: 2,
                                             mb: 1,
+                                            cursor: 'pointer',
                                             '&:hover': { bgcolor: 'indigo.50' }
                                         }}
                                     >
@@ -138,15 +138,15 @@ const CalendarWidget = () => {
                                                 </Typography>
                                             }
                                             secondary={
-                                                <Box>
-                                                    <Box display="flex" alignItems="center" gap={0.5} mt={0.5} mb={1}>
+                                                <Typography component="span" variant="body2" color="text.secondary">
+                                                    <Box component="span" display="flex" alignItems="center" gap={0.5} mt={0.5} mb={1}>
                                                         <Clock size={14} className="text-slate-500" />
-                                                        <Typography variant="caption" color="text.secondary" fontWeight="medium">
+                                                        <Typography component="span" variant="caption" color="text.secondary" fontWeight="medium">
                                                             {event.start_time} - {event.end_time}
                                                         </Typography>
                                                     </Box>
                                                     {event.participants && event.participants.length > 0 && (
-                                                        <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: 10 } }}>
+                                                        <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: 10 }, justifyContent: 'flex-start' }}>
                                                             {event.participants.map((p) => (
                                                                 <Avatar key={p.id} alt={p.name} src="/static/images/avatar/1.jpg">
                                                                     {p.name.charAt(0)}
@@ -154,7 +154,7 @@ const CalendarWidget = () => {
                                                             ))}
                                                         </AvatarGroup>
                                                     )}
-                                                </Box>
+                                                </Typography>
                                             }
                                         />
                                     </ListItem>

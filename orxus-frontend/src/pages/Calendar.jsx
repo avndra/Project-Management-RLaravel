@@ -33,8 +33,21 @@ const Calendar = () => {
 
     const handleCreateEvent = (eventData) => {
         apiClient.post('/events', eventData)
-            .then(() => fetchEvents())
-            .catch(error => console.error('Error creating event', error));
+            .then(() => {
+                fetchEvents();
+                setIsCreateModalOpen(false);
+            })
+            .catch(error => {
+                console.error('Error creating event', error);
+                if (error.response?.data?.errors) {
+                    const errorMessages = Object.values(error.response.data.errors).flat().join('\n');
+                    alert('Validasi Gagal:\n' + errorMessages);
+                } else if (error.response?.data?.message) {
+                    alert('Error: ' + error.response.data.message);
+                } else {
+                    alert('Terjadi kesalahan saat membuat event. Pastikan waktu selesai lebih lambat dari waktu mulai.');
+                }
+            });
     };
 
     const handleEventClick = (event) => {
@@ -156,8 +169,8 @@ const Calendar = () => {
                             {date && (
                                 <>
                                     <div className={`text-sm font-medium mb-2 w-7 h-7 flex items-center justify-center rounded-full ${date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth()
-                                            ? 'bg-blue-600 text-white shadow-sm'
-                                            : 'text-slate-700'
+                                        ? 'bg-blue-600 text-white shadow-sm'
+                                        : 'text-slate-700'
                                         }`}>
                                         {date.getDate()}
                                     </div>
@@ -167,8 +180,8 @@ const Calendar = () => {
                                                 key={idx}
                                                 onClick={() => handleEventClick(item)}
                                                 className={`text-xs px-2 py-1.5 rounded border shadow-sm truncate cursor-pointer transition-transform hover:scale-105 ${item.type === 'event'
-                                                        ? 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200'
-                                                        : 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200'
+                                                    ? 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200'
+                                                    : 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200'
                                                     }`}
                                                 title={item.title}
                                             >

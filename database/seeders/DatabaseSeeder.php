@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            // ProjectSeeder::class, // Commenting out to start clean or keep if needed
-            // TaskSeeder::class,    // Commenting out to start clean or keep if needed
+            ProjectSeeder::class, // Commenting out to start clean or keep if needed
+            TaskSeeder::class,    // Commenting out to start clean or keep if needed
         ]);
     }
 }

@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import apiClient from '../api';
-import EditUserModal from '../components/modals/EditUserModal';
-import CreateUserModal from '../components/modals/CreateUserModal';
-import { Edit2, Trash2, UserPlus, Mail, Shield } from 'lucide-react';
+import { Trash2, Mail, Shield } from 'lucide-react';
 
 const Team = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
 
     const fetchUsers = () => {
         apiClient.get('/users')
@@ -28,33 +23,8 @@ const Team = () => {
         fetchUsers();
     }, []);
 
-    const handleCreateUser = (user) => {
-        apiClient.post('/users', user)
-            .then(response => {
-                fetchUsers();
-            })
-            .catch(error => {
-                console.error('Error creating user', error);
-            });
-    };
-
-    const handleEditUser = (user) => {
-        setSelectedUser(user);
-        setIsEditModalOpen(true);
-    };
-
-    const handleUpdateUser = (user) => {
-        apiClient.put(`/users/${user.id}`, user)
-            .then(response => {
-                fetchUsers();
-            })
-            .catch(error => {
-                console.error('Error updating user', error);
-            });
-    };
-
     const handleDeleteUser = (userId) => {
-        if (window.confirm('Are you sure you want to delete this user?')) {
+        if (window.confirm('Apakah Anda yakin ingin mengeluarkan pengguna ini?')) {
             apiClient.delete(`/users/${userId}`)
                 .then(response => {
                     fetchUsers();
@@ -70,31 +40,10 @@ const Team = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-end">
-                <div>
-                    <h1 className="text-3xl font-bold text-slate-800">Anggota Tim</h1>
-                    <p className="text-slate-500 mt-1">Kelola akses dan peran pengguna.</p>
-                </div>
-                <button
-                    onClick={() => setIsCreateModalOpen(true)}
-                    className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-md hover:bg-blue-700 transition-all hover:shadow-lg"
-                >
-                    <UserPlus className="w-5 h-5" />
-                    Tambah Pengguna
-                </button>
+            <div>
+                <h1 className="text-3xl font-bold text-slate-800">Anggota Tim</h1>
+                <p className="text-slate-500 mt-1">Kelola akses dan peran pengguna.</p>
             </div>
-
-            <CreateUserModal
-                isOpen={isCreateModalOpen}
-                onClose={() => setIsCreateModalOpen(false)}
-                onSubmit={handleCreateUser}
-            />
-            <EditUserModal
-                isOpen={isEditModalOpen}
-                onClose={() => setIsEditModalOpen(false)}
-                onSubmit={handleUpdateUser}
-                user={selectedUser}
-            />
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                 <table className="min-w-full divide-y divide-slate-200">
@@ -125,29 +74,25 @@ const Team = () => {
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className={`px-3 py-1 inline-flex items-center gap-1 text-xs leading-5 font-semibold rounded-full ${
-                                        user.role === 'admin' 
-                                            ? 'bg-purple-100 text-purple-800' 
-                                            : 'bg-blue-100 text-blue-800'
-                                    }`}>
+                                    <span className={`px-3 py-1 inline-flex items-center gap-1 text-xs leading-5 font-semibold rounded-full ${user.role === 'admin'
+                                        ? 'bg-purple-100 text-purple-800'
+                                        : 'bg-blue-100 text-blue-800'
+                                        }`}>
                                         <Shield className="w-3 h-3" />
                                         {user.role ? user.role.toUpperCase() : 'STAFF'}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4">
                                     <div className="text-sm text-slate-600">
-                                        {user.projects && user.projects.length > 0 
-                                            ? user.projects.map(p => p.name).join(', ') 
+                                        {user.projects && user.projects.length > 0
+                                            ? user.projects.map(p => p.name).join(', ')
                                             : <span className="text-slate-400 italic">Tidak ada proyek</span>
                                         }
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div className="flex justify-end gap-3">
-                                        <button onClick={() => handleEditUser(user)} className="text-slate-400 hover:text-blue-600 transition-colors">
-                                            <Edit2 className="w-5 h-5" />
-                                        </button>
-                                        <button onClick={() => handleDeleteUser(user.id)} className="text-slate-400 hover:text-red-600 transition-colors">
+                                        <button onClick={() => handleDeleteUser(user.id)} className="text-slate-400 hover:text-red-600 transition-colors" title="Keluarkan">
                                             <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>

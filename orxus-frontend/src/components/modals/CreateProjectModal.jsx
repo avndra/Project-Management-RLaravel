@@ -3,12 +3,10 @@ import React, { useState } from 'react';
 const CreateProjectModal = ({ isOpen, onClose, onSubmit }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ name, description, start_date: startDate, end_date: endDate });
+        onSubmit({ name, description });
         onClose();
     };
 
@@ -40,26 +38,7 @@ const CreateProjectModal = ({ isOpen, onClose, onSubmit }) => {
                             required
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Tanggal Mulai</label>
-                        <input
-                            type="date"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Tanggal Selesai</label>
-                        <input
-                            type="date"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
-                    </div>
+
                     <div className="flex justify-end">
                         <button
                             type="button"

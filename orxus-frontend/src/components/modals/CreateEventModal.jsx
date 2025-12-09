@@ -8,24 +8,31 @@ const CreateEventModal = ({ isOpen, onClose, onSubmit }) => {
     const [endTime, setEndTime] = useState('');
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (isOpen) {
             apiClient.get('/users')
                 .then(response => setUsers(response.data.data))
                 .catch(error => console.error('Error fetching users', error));
+            setError(null); // Clear error when modal opens
         }
     }, [isOpen]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({
+        setError(null);
+
+        const eventData = {
             title,
             description,
             start_time: startTime,
             end_time: endTime,
             participants: selectedUsers
-        });
+        };
+
+        onSubmit(eventData);
+
         // Reset form
         setTitle('');
         setDescription('');
